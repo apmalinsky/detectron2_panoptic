@@ -505,22 +505,14 @@ class Visualizer:
         # draw mask for all semantic segments first i.e. "stuff"
         for mask, sinfo in pred.semantic_masks():
             category_idx = sinfo["category_id"]
-            stuff_class = [stuff for stuff in self.metadata.stuff_classes if stuff.get('id')==category_idx]
-            
             text = 'stuff'
             mask_color = None
-            
-            if len(stuff_class) > 0:
-                text = stuff_class[0]['name']
-                mask_color = [x / 255 for x in stuff_class[0]['color']]
+            print('CATEGORY_IDX:', category_idx, self.metadata.stuff_classes[category_idx])
+            if category_idx in self.metadata.stuff_dataset_id_to_contiguous_id:
+                contiguous_id = self.metadata.stuff_dataset_id_to_contiguous_id[category_idx]
+                text = self.metadata.stuff_classes[contiguous_id]
+                mask_color = [x / 255 for x in self.metadata.stuff_colors[contiguous_id]]
                 
-            # try:
-            #     # mask_color = [x / 255 for x in self.metadata.stuff_colors[category_idx]]
-            #     mask_color = color
-
-            # except AttributeError:
-            #     mask_color = None
-
             # text = self.metadata.stuff_classes[category_idx]
             
             self.draw_binary_mask(
