@@ -135,7 +135,7 @@ def register_coco_panoptic_separated(
         sem_seg_root (str): directory which contains all the ground truth segmentation annotations.
         instances_json (str): path to the json instance annotation file
     """
-    panoptic_name = name
+    panoptic_name = name + '_separated'
     DatasetCatalog.register(
         panoptic_name,
         lambda: merge_to_panoptic(
