@@ -505,7 +505,7 @@ class Visualizer:
         # draw mask for all semantic segments first i.e. "stuff"
         for mask, sinfo in pred.semantic_masks():
             category_idx = sinfo["category_id"]
-            stuff_class = [stuff for stuff in self.metadata['stuff_classes'] if stuff.get('id')==category_idx]
+            stuff_class = [stuff for stuff in self.metadata.stuff_classes if stuff.get('id')==category_idx]
             
             text = 'stuff'
             mask_color = None
