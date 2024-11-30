@@ -314,7 +314,7 @@ class DefaultPredictor:
         self.model = build_model(self.cfg)
         self.model.eval()
         if len(cfg.DATASETS.TEST):
-            self.metadata = MetadataCatalog.get(cfg.DATASETS.TEST[0])
+            self.metadata = MetadataCatalog.get(cfg.DATASETS.TEST)
 
         checkpointer = DetectionCheckpointer(self.model)
         checkpointer.load(cfg.MODEL.WEIGHTS)

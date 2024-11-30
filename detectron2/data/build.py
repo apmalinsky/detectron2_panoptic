@@ -476,7 +476,7 @@ def _train_loader_from_config(cfg, mapper=None, *, dataset=None, sampler=None):
             ),
             proposal_files=cfg.DATASETS.PROPOSAL_FILES_TRAIN if cfg.MODEL.LOAD_PROPOSALS else None,
         )
-        _log_api_usage("dataset." + cfg.DATASETS.TRAIN[0])
+        _log_api_usage("dataset." + cfg.DATASETS.TRAIN)
 
     if mapper is None:
         mapper = DatasetMapper(cfg, True)

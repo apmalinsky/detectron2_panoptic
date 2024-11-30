@@ -155,7 +155,7 @@ def get_sample_inputs(args):
 
     if args.sample_image is None:
         # get a first batch from dataset
-        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST[0])
+        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST)
         first_batch = next(iter(data_loader))
         return first_batch
     else:
@@ -232,7 +232,7 @@ def main() -> None:
             f"export_method={args.export_method}, format={args.format}."
         )
         logger.info("Running evaluation ... this takes a long time if you export to CPU.")
-        dataset = cfg.DATASETS.TEST[0]
+        dataset = cfg.DATASETS.TEST
         data_loader = build_detection_test_loader(cfg, dataset)
         # NOTE: hard-coded evaluator. change to the evaluator for your dataset
         evaluator = COCOEvaluator(dataset, output_dir=args.output)

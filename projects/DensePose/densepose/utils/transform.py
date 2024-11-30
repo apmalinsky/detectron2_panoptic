@@ -14,4 +14,4 @@ def load_for_dataset(dataset_name):
 
 
 def load_from_cfg(cfg):
-    return load_for_dataset(cfg.DATASETS.TEST[0])
+    return load_for_dataset(cfg.DATASETS.TEST)

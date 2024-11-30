@@ -53,7 +53,7 @@ def main() -> None:
 
     dirname = args.output_dir
     os.makedirs(dirname, exist_ok=True)
-    metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
+    metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN)
 
     def output(vis, fname):
         if args.show:

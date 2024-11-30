@@ -39,7 +39,7 @@ def setup(args):
 
 def do_flop(cfg):
     if isinstance(cfg, CfgNode):
-        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST[0])
+        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST)
         model = build_model(cfg)
         DetectionCheckpointer(model).load(cfg.MODEL.WEIGHTS)
     else:
@@ -70,7 +70,7 @@ def do_flop(cfg):
 
 def do_activation(cfg):
     if isinstance(cfg, CfgNode):
-        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST[0])
+        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST)
         model = build_model(cfg)
         DetectionCheckpointer(model).load(cfg.MODEL.WEIGHTS)
     else:

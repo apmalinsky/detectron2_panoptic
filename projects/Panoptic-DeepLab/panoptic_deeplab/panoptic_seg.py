@@ -46,7 +46,7 @@ class PanopticDeepLab(nn.Module):
         self.ins_embed_head = build_ins_embed_branch(cfg, self.backbone.output_shape())
         self.register_buffer("pixel_mean", torch.tensor(cfg.MODEL.PIXEL_MEAN).view(-1, 1, 1), False)
         self.register_buffer("pixel_std", torch.tensor(cfg.MODEL.PIXEL_STD).view(-1, 1, 1), False)
-        self.meta = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
+        self.meta = MetadataCatalog.get(cfg.DATASETS.TRAIN)
         self.stuff_area = cfg.MODEL.PANOPTIC_DEEPLAB.STUFF_AREA
         self.threshold = cfg.MODEL.PANOPTIC_DEEPLAB.CENTER_THRESHOLD
         self.nms_kernel = cfg.MODEL.PANOPTIC_DEEPLAB.NMS_KERNEL

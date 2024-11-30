@@ -141,7 +141,7 @@ def benchmark_eval(args):
 
         cfg.defrost()
         cfg.DATALOADER.NUM_WORKERS = 0
-        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST[0])
+        data_loader = build_detection_test_loader(cfg, cfg.DATASETS.TEST)
     else:
         model = instantiate(cfg.model)
         model.to(cfg.train.device)
