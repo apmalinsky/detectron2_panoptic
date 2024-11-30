@@ -510,7 +510,8 @@ class Visualizer:
             except AttributeError:
                 mask_color = None
 
-            text = self.metadata.stuff_classes[category_idx]
+            # text = self.metadata.stuff_classes[category_idx]
+            text = 'testest'
             self.draw_binary_mask(
                 mask,
                 color=mask_color,
