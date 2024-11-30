@@ -511,7 +511,10 @@ class Visualizer:
                 mask_color = None
 
             # text = self.metadata.stuff_classes[category_idx]
-            text = 'testest'
+            text = 'stuff'
+            stuff_class = [stuff for stuff in self.metadata['stuff_classes'] if stuff.get('id')==category_idx]
+            if len(stuff_class) > 0:
+                text = stuff_class[0]['name']
             self.draw_binary_mask(
                 mask,
                 color=mask_color,
