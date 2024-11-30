@@ -507,13 +507,14 @@ class Visualizer:
             category_idx = sinfo["category_id"]
             text = 'stuff'
             mask_color = None
-            print('CATEGORY_IDX:', category_idx, self.metadata.stuff_classes[category_idx])
+            print('CATEGORY_IDX:', category_idx, self.metadata)
             if category_idx in self.metadata.stuff_dataset_id_to_contiguous_id:
                 contiguous_id = self.metadata.stuff_dataset_id_to_contiguous_id[category_idx]
                 text = self.metadata.stuff_classes[contiguous_id]
                 mask_color = [x / 255 for x in self.metadata.stuff_colors[contiguous_id]]
                 
             # text = self.metadata.stuff_classes[category_idx]
+            # mask_color = [x / 255 for x in self.metadata.stuff_colors[category_idx]]
             
             self.draw_binary_mask(
                 mask,
