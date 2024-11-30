@@ -512,7 +512,7 @@ class Visualizer:
             
             if len(stuff_class) > 0:
                 text = stuff_class[0]['name']
-                mask_color = stuff_class[0]['color']
+                mask_color = [x / 255 for x in stuff_class[0]['color']]
                 
             # try:
             #     # mask_color = [x / 255 for x in self.metadata.stuff_colors[category_idx]]
