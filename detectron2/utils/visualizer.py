@@ -185,7 +185,7 @@ class _PanopticPrediction:
 
         self._sinfo = {s["id"]: s for s in segments_info}  # seg id -> seg info
         segment_ids, areas = torch.unique(panoptic_seg, sorted=True, return_counts=True)
-        areas = areas.numpy()
+        areas = areas.cpu().numpy()
         sorted_idxs = np.argsort(-areas)
         self._seg_ids, self._seg_areas = segment_ids[sorted_idxs], areas[sorted_idxs]
         self._seg_ids = self._seg_ids.tolist()
