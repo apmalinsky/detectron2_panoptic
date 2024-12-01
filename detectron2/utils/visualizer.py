@@ -507,7 +507,6 @@ class Visualizer:
             category_idx = sinfo["category_id"]
             text = 'stuff'
             mask_color = None
-            print('CATEGORY_IDX:', category_idx, self.metadata)
             if category_idx in self.metadata.stuff_dataset_id_to_contiguous_id:
                 contiguous_id = self.metadata.stuff_dataset_id_to_contiguous_id[category_idx]
                 text = self.metadata.stuff_classes[contiguous_id]
