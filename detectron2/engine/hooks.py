@@ -506,7 +506,7 @@ class EvalHook(HookBase):
     It is executed every ``eval_period`` iterations and after the last iteration.
     """
 
-    def __init__(self, eval_period, eval_function, eval_after_train=True):
+    def __init__(self, eval_period, eval_function, eval_after_train=False):
         """
         Args:
             eval_period (int): the period to run `eval_function`. Set to 0 to
