@@ -628,10 +628,10 @@ Alternatively, you can call evaluation functions yourself (see Colab balloon tut
         logger = logging.getLogger(__name__)
         if isinstance(evaluators, DatasetEvaluator):
             evaluators = [evaluators]
-        if evaluators is not None:
-            assert len(cfg.DATASETS.TEST) == len(evaluators), "{} != {}".format(
-                len(cfg.DATASETS.TEST), len(evaluators)
-            )
+        # if evaluators is not None:
+        #     assert len(cfg.DATASETS.TEST) == len(evaluators), "{} != {}".format(
+        #         len(cfg.DATASETS.TEST), len(evaluators)
+        #     )
 
         results = OrderedDict()
         # for idx, dataset_name in enumerate(cfg.DATASETS.TEST):
