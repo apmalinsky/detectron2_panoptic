@@ -56,13 +56,15 @@ class COCOPanopticEvaluator(DatasetEvaluator):
             # the model produces panoptic category id directly. No more conversion needed
             return segment_info
         if isthing is True:
-            segment_info["category_id"] = self._thing_contiguous_id_to_dataset_id[
-                segment_info["category_id"]
-            ]
+            if segment_info["category_id"] in self._thing_contiguous_id_to_dataset_id:
+                segment_info["category_id"] = self._thing_contiguous_id_to_dataset_id[
+                    segment_info["category_id"]
+                ]
         else:
-            segment_info["category_id"] = self._stuff_contiguous_id_to_dataset_id[
-                segment_info["category_id"]
-            ]
+            if segment_info["category_id"] in self._stuff_contiguous_id_to_dataset_id:
+                segment_info["category_id"] = self._stuff_contiguous_id_to_dataset_id[
+                    segment_info["category_id"]
+                ]
         return segment_info
 
     def process(self, inputs, outputs):
