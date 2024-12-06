@@ -114,7 +114,7 @@ class COCOPanopticEvaluator(DatasetEvaluator):
                 
                 # segments_info = [self._convert_category_id(x) for x in segments_info]
                 # Filter out predictions with invalid category ids
-                segments_info = [x for x in segments_info if self.is_valid_category(x)]
+                segments_info = [x for x in segments_info if self._is_valid_category(x)]
                 
                 self._predictions.append(
                     {
