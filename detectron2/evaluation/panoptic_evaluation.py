@@ -65,6 +65,8 @@ class COCOPanopticEvaluator(DatasetEvaluator):
                 segment_info["category_id"] = self._stuff_contiguous_id_to_dataset_id[
                     segment_info["category_id"]
                 ]
+            else:
+                segment_info["category_id"] = 0 # default to things category
         return segment_info
 
     def process(self, inputs, outputs):
