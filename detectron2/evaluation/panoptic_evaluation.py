@@ -60,6 +60,8 @@ class COCOPanopticEvaluator(DatasetEvaluator):
                 segment_info["category_id"] = self._thing_contiguous_id_to_dataset_id[
                     segment_info["category_id"]
                 ]
+            segment_info["instance_id"] += 1
+
         # else:
         #     if segment_info["category_id"] in self._stuff_contiguous_id_to_dataset_id:
         #         segment_info["category_id"] = self._stuff_contiguous_id_to_dataset_id[
