@@ -52,7 +52,7 @@ class COCOPanopticEvaluator(DatasetEvaluator):
 
     def _convert_category_id(self, segment_info):
         isthing = segment_info.pop("isthing", None)
-        if isthing is None:
+        if isthing is None or not isthing:
             # the model produces panoptic category id directly. No more conversion needed
             return segment_info
         if isthing is True:
@@ -60,20 +60,20 @@ class COCOPanopticEvaluator(DatasetEvaluator):
                 segment_info["category_id"] = self._thing_contiguous_id_to_dataset_id[
                     segment_info["category_id"]
                 ]
-        else:
-            if segment_info["category_id"] in self._stuff_contiguous_id_to_dataset_id:
-                segment_info["category_id"] = self._stuff_contiguous_id_to_dataset_id[
-                    segment_info["category_id"]
-                ]
+        # else:
+        #     if segment_info["category_id"] in self._stuff_contiguous_id_to_dataset_id:
+        #         segment_info["category_id"] = self._stuff_contiguous_id_to_dataset_id[
+        #             segment_info["category_id"]
+        #         ]
 
         return segment_info
 
-    def _is_valid_category(self, c):
-        if c['isthing'] and c['category_id'] not in self._metadata.thing_dataset_id_to_contiguous_id.keys():
-            return False
-        if not c['isthing'] and c['category_id'] not in self._metadata.stuff_dataset_id_to_contiguous_id.keys():
-            return False
-        return True
+    # def _is_valid_category(self, c):
+    #     if c['isthing'] and c['category_id'] not in self._metadata.thing_dataset_id_to_contiguous_id.keys():
+    #         return False
+    #     if not c['isthing'] and c['category_id'] not in self._metadata.stuff_dataset_id_to_contiguous_id.keys():
+    #         return False
+    #     return True
 
     def process(self, inputs, outputs):
         from panopticapi.utils import id2rgb
@@ -112,9 +112,7 @@ class COCOPanopticEvaluator(DatasetEvaluator):
             with io.BytesIO() as out:
                 Image.fromarray(id2rgb(panoptic_img)).save(out, format="PNG")
                 
-                # segments_info = [self._convert_category_id(x) for x in segments_info]
-                # Filter out predictions with invalid category ids
-                segments_info = [x for x in segments_info if self._is_valid_category(x)]
+                segments_info = [self._convert_category_id(x) for x in segments_info]
                 
                 self._predictions.append(
                     {
