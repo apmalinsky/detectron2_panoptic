@@ -65,9 +65,15 @@ class COCOPanopticEvaluator(DatasetEvaluator):
                 segment_info["category_id"] = self._stuff_contiguous_id_to_dataset_id[
                     segment_info["category_id"]
                 ]
-            else:
-                segment_info["category_id"] = 0 # default to things category
+
         return segment_info
+
+    def _is_valid_category(self, c):
+        if c['isthing'] and c['category_id'] not in self._metadata.thing_dataset_id_to_contiguous_id.keys():
+            return False
+        if not c['isthing'] and c['category_id'] not in self._metadata.stuff_dataset_id_to_contiguous_id.keys():
+            return False
+        return True
 
     def process(self, inputs, outputs):
         from panopticapi.utils import id2rgb
@@ -105,7 +111,11 @@ class COCOPanopticEvaluator(DatasetEvaluator):
             file_name_png = os.path.splitext(file_name)[0] + ".png"
             with io.BytesIO() as out:
                 Image.fromarray(id2rgb(panoptic_img)).save(out, format="PNG")
-                segments_info = [self._convert_category_id(x) for x in segments_info]
+                
+                # segments_info = [self._convert_category_id(x) for x in segments_info]
+                # Filter out predictions with invalid category ids
+                segments_info = [x for x in segments_info if self.is_valid_category(x)]
+                
                 self._predictions.append(
                     {
                         "image_id": input["image_id"],
